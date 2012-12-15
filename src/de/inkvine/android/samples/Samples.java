@@ -1,10 +1,19 @@
-androidgoogleplacessearch - The easy way to search for Google Places nearby
+package de.inkvine.android.samples;
 
-Remember! You have to pass a location instance and your API Key to the Google Places API 
-to the GooglePlacesSearch instance.
+import java.util.ArrayList;
+import java.util.List;
 
-The two sample methods below, show how you can interact with the GooglePlacesSearch API. 
-=========================
+import android.location.Location;
+import android.util.Log;
+import de.inkvine.android.googleplacessearch.FilterCriteria;
+import de.inkvine.android.googleplacessearch.GooglePlacesSearch;
+import de.inkvine.android.googleplacessearch.LimitedResultFilterCriteria;
+import de.inkvine.android.googleplacessearch.exceptions.APIKeyNotSetException;
+import de.inkvine.android.googleplacessearch.exceptions.LocationNotAvailableException;
+import de.inkvine.android.googleplacessearch.impl.DefaultGooglePlacesSearch;
+import de.inkvine.android.googleplacessearch.impl.FilterCriteriaImpl;
+import de.inkvine.android.googleplacessearch.impl.FilterCriteriaWithLimitedResultImpl;
+import de.inkvine.android.googleplacessearch.model.Place;
 
 public class Samples {
 

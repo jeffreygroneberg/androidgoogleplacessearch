@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 
 import de.inkvine.android.googleplacessearch.FilterCriteria;
 import de.inkvine.android.googleplacessearch.GooglePlacesSearch;
+import de.inkvine.android.googleplacessearch.LimitedResultFilterCriteria;
 import de.inkvine.android.googleplacessearch.exceptions.APIKeyNotSetException;
 import de.inkvine.android.googleplacessearch.exceptions.LocationNotAvailableException;
 import de.inkvine.android.googleplacessearch.impl.generated_gson.PlacesResponse;
@@ -103,10 +104,11 @@ public class DefaultGooglePlacesSearch implements GooglePlacesSearch {
 
 		for (String item : storeNames) {
 
-			FilterCriteria description = new FilterCriteriaWithLimitedResultImpl(item);
-			description.addPlacesType(FilterCriteria.FILTER_TYPE_STORE);
+			FilterCriteria criteria = new FilterCriteriaWithLimitedResultImpl(
+					item);
+			criteria.addPlacesType(FilterCriteria.FILTER_TYPE_STORE);
 
-			descriptions.add(description);
+			descriptions.add(criteria);
 
 		}
 
@@ -121,7 +123,7 @@ public class DefaultGooglePlacesSearch implements GooglePlacesSearch {
 	 * int)
 	 */
 	@Override
-	public List<Place> search(List<FilterCriteria> criterias, final int radius)
+	public List<Place> search(List<? extends FilterCriteria> criterias, final int radius)
 			throws LocationNotAvailableException, APIKeyNotSetException {
 
 		final List<Place> aggregatedList = new ArrayList<Place>();
@@ -147,11 +149,30 @@ public class DefaultGooglePlacesSearch implements GooglePlacesSearch {
 							item, radius);
 
 					List<Results> results = resp.getResults();
+
 					if (results != null && results.size() > 0) {
 
-						Results topResult = results.get(0);
+						// our result is limited
+						if (item instanceof LimitedResultFilterCriteria) {
 
-						aggregatedList.add(new PlaceImpl(topResult, item));
+							int resultNumber = Math.min(
+									((LimitedResultFilterCriteria) item)
+											.getMaxResults(), results.size());
+
+							for (int i = 0; i < resultNumber; i++) {
+
+								aggregatedList.add(new PlaceImpl(
+										results.get(i), item));
+
+							}
+
+						} else
+
+							for (Results resultItem : results) {
+
+								aggregatedList.add(new PlaceImpl(resultItem,
+										item));
+							}
 
 					}
 
@@ -178,7 +199,7 @@ public class DefaultGooglePlacesSearch implements GooglePlacesSearch {
 	}
 
 	/**
-	 * This method will search for 
+	 * This method will search for
 	 * 
 	 * @param location
 	 * @param criteria
@@ -190,9 +211,8 @@ public class DefaultGooglePlacesSearch implements GooglePlacesSearch {
 		URL url = null;
 		try {
 			url = new URL(GooglePlacesSearchUtil.buildPlacesAPIRequestUrl(
-					criteria.getPlacesName(), apiKey,
-					location.getLatitude(), location.getLongitude(), radius,
-					criteria.getPlacesTypes()));
+					criteria.getPlacesName(), apiKey, location.getLatitude(),
+					location.getLongitude(), radius, criteria.getPlacesTypes()));
 			System.out.println(url);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block

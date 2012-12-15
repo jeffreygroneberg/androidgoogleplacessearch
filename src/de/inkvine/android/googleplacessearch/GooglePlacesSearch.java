@@ -56,7 +56,7 @@ public interface GooglePlacesSearch {
 	 * @throws LocationNotAvailableException
 	 * @throws APIKeyNotSetException
 	 */
-	public List<Place> search(List<FilterCriteria> criterias, int radius)
+	public List<Place> search(List<? extends FilterCriteria> criterias, int radius)
 			throws LocationNotAvailableException, APIKeyNotSetException;
 
 }

@@ -13,8 +13,8 @@ import de.inkvine.android.googleplacessearch.LimitedResultFilterCriteria;
  * @author Jeffrey Groneberg (www.twitter.com/inkvine)
  * 
  */
-public class FilterCriteriaWithLimitedResultImpl implements
-		LimitedResultFilterCriteria {
+public class FilterCriteriaWithLimitedResultImpl extends FilterCriteriaImpl
+		implements LimitedResultFilterCriteria {
 
 	/**
 	 * The name of the place we are looking for
@@ -26,17 +26,30 @@ public class FilterCriteriaWithLimitedResultImpl implements
 	 */
 	private List<String> typeList;
 
-	public FilterCriteriaWithLimitedResultImpl(String placesName) {
+	private int maxResults = -1;
 
-		this.placesName = placesName;
+	public FilterCriteriaWithLimitedResultImpl(String placesName,
+			List<String> typeList, int maxResults) {
+
+		super(placesName, typeList);
+		this.maxResults = maxResults;
 
 	}
 
 	public FilterCriteriaWithLimitedResultImpl(String placesName,
 			List<String> typeList) {
 
-		this.typeList = typeList;
+		super(placesName, typeList);
+		this.maxResults = 2;
+
+	}
+
+	public FilterCriteriaWithLimitedResultImpl(String placesName) {
+
+		super(placesName);
+
 		this.placesName = placesName;
+		this.maxResults = 2;
 
 	}
 
@@ -63,9 +76,15 @@ public class FilterCriteriaWithLimitedResultImpl implements
 	}
 
 	@Override
-	public int maxResults() {
+	public int getMaxResults() {
 		// TODO Auto-generated method stub
-		return 2;
+		return maxResults;
+	}
+
+	@Override
+	public void setMaxResults(int maxResults) {
+
+		this.maxResults = maxResults;
 	}
 
 }
