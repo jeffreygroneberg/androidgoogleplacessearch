@@ -18,6 +18,10 @@ import com.google.gson.Gson;
 import de.inkvine.android.googleplacessearch.GooglePlacesSearch;
 import de.inkvine.android.googleplacessearch.exceptions.APIKeyNotSetException;
 import de.inkvine.android.googleplacessearch.exceptions.LocationNotAvailableException;
+import de.inkvine.android.googleplacessearch.exceptions.RequestDeniedException;
+import de.inkvine.android.googleplacessearch.exceptions.RequestException;
+import de.inkvine.android.googleplacessearch.exceptions.RequestLimitExceededException;
+import de.inkvine.android.googleplacessearch.exceptions.RequestWrongFormattedException;
 import de.inkvine.android.googleplacessearch.filter.FilterCriteria;
 import de.inkvine.android.googleplacessearch.filter.LimitedResultFilterCriteria;
 import de.inkvine.android.googleplacessearch.filter.impl.FilterCriteriaWithLimitedResultImpl;
@@ -92,7 +96,8 @@ public class DefaultGooglePlacesSearch implements GooglePlacesSearch {
 	 */
 	@Override
 	public List<Place> searchForStores(List<String> storeNames, int radius)
-			throws LocationNotAvailableException, APIKeyNotSetException {
+			throws LocationNotAvailableException, APIKeyNotSetException,
+			RequestException {
 
 		if (location == null)
 			throw new LocationNotAvailableException(
@@ -121,8 +126,9 @@ public class DefaultGooglePlacesSearch implements GooglePlacesSearch {
 	 * int)
 	 */
 	@Override
-	public List<Place> search(List<? extends FilterCriteria> criterias, final int radius)
-			throws LocationNotAvailableException, APIKeyNotSetException {
+	public List<Place> search(List<? extends FilterCriteria> criterias,
+			final int radius) throws LocationNotAvailableException,
+			APIKeyNotSetException, RequestException {
 
 		final List<Place> aggregatedList = new ArrayList<Place>();
 
@@ -136,6 +142,8 @@ public class DefaultGooglePlacesSearch implements GooglePlacesSearch {
 
 		List<Thread> threadList = new ArrayList<Thread>();
 
+		final List<RequestException> exceptionList = new ArrayList<RequestException>();
+
 		// Create threads
 		for (final FilterCriteria item : criterias) {
 
@@ -144,7 +152,11 @@ public class DefaultGooglePlacesSearch implements GooglePlacesSearch {
 				public void run() {
 
 					PlacesResponse resp = searchForSurroundingPlaces(location,
-							item, radius);
+							item, radius, exceptionList);
+
+					// something happened while firing the request
+					if (resp == null)
+						return;
 
 					List<Results> results = resp.getResults();
 
@@ -192,6 +204,11 @@ public class DefaultGooglePlacesSearch implements GooglePlacesSearch {
 				e.printStackTrace();
 			}
 
+		// Get exceptions if some occurred
+		if (exceptionList != null && exceptionList.size() > 0)
+			for (RequestException e : exceptionList)
+				throw e;
+
 		return aggregatedList;
 
 	}
@@ -202,10 +219,12 @@ public class DefaultGooglePlacesSearch implements GooglePlacesSearch {
 	 * @param location
 	 * @param criteria
 	 * @param radius
+	 * @param exceptionList
 	 * @return
 	 */
 	private PlacesResponse searchForSurroundingPlaces(Location location,
-			FilterCriteria criteria, int radius) {
+			FilterCriteria criteria, int radius,
+			List<RequestException> exceptionList) {
 		URL url = null;
 		try {
 			url = new URL(GooglePlacesSearchUtil.buildPlacesAPIRequestUrl(
@@ -221,12 +240,29 @@ public class DefaultGooglePlacesSearch implements GooglePlacesSearch {
 		try {
 			con = (HttpURLConnection) url.openConnection();
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}
 
 		try {
-			return parseResponse(con.getInputStream());
+			PlacesResponse response = parseResponse(con.getInputStream());
+
+			if (response.getStatus().equals(
+					GooglePlacesSearch.STATUS_CODE_REQUEST_DENIED))
+				exceptionList.add(new RequestDeniedException(
+						"Your request has been denied.", url.toString()));
+
+			if (response.getStatus().equals(
+					GooglePlacesSearch.STATUS_CODE_INVALID_REQUEST))
+				exceptionList.add(new RequestWrongFormattedException(
+						"Something went wrong with your request.", url
+								.toString()));
+			if (response.getStatus().equals(
+					GooglePlacesSearch.STATUS_CODE_OVER_QUERY_LIMIT))
+				exceptionList.add(new RequestLimitExceededException(
+						"You have exceeded your API request limit.", url
+								.toString()));
+
 		} catch (IOException e) {
 
 			e.printStackTrace();

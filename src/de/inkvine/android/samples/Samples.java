@@ -8,6 +8,7 @@ import android.util.Log;
 import de.inkvine.android.googleplacessearch.GooglePlacesSearch;
 import de.inkvine.android.googleplacessearch.exceptions.APIKeyNotSetException;
 import de.inkvine.android.googleplacessearch.exceptions.LocationNotAvailableException;
+import de.inkvine.android.googleplacessearch.exceptions.RequestException;
 import de.inkvine.android.googleplacessearch.filter.FilterCriteria;
 import de.inkvine.android.googleplacessearch.filter.LimitedResultFilterCriteria;
 import de.inkvine.android.googleplacessearch.filter.impl.FilterCriteriaImpl;
@@ -44,6 +45,10 @@ public class Samples {
 			e.printStackTrace();
 		} catch (APIKeyNotSetException e) {
 
+			e.printStackTrace();
+		} catch (RequestException e) {
+
+			Log.e("sampleStoreSearch", e.getGeneratedURL());
 			e.printStackTrace();
 		}
 
@@ -110,6 +115,12 @@ public class Samples {
 		} catch (APIKeyNotSetException e) {
 
 			e.printStackTrace();
+		} catch (RequestException e) {
+
+			Log.e("sampleSearchWithCustomResultFilterCriteria",
+					e.getGeneratedURL());
+			e.printStackTrace();
+
 		}
 
 	}

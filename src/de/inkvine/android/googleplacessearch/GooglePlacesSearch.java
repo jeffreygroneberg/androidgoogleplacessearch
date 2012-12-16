@@ -5,6 +5,10 @@ import java.util.List;
 import android.location.Location;
 import de.inkvine.android.googleplacessearch.exceptions.APIKeyNotSetException;
 import de.inkvine.android.googleplacessearch.exceptions.LocationNotAvailableException;
+import de.inkvine.android.googleplacessearch.exceptions.RequestDeniedException;
+import de.inkvine.android.googleplacessearch.exceptions.RequestException;
+import de.inkvine.android.googleplacessearch.exceptions.RequestLimitExceededException;
+import de.inkvine.android.googleplacessearch.exceptions.RequestWrongFormattedException;
 import de.inkvine.android.googleplacessearch.filter.FilterCriteria;
 import de.inkvine.android.googleplacessearch.model.Place;
 
@@ -22,6 +26,11 @@ import de.inkvine.android.googleplacessearch.model.Place;
  * 
  */
 public interface GooglePlacesSearch {
+
+	public static String STATUS_CODE_ZERO_RESULTS = "ZERO_RESULTS";
+	public static String STATUS_CODE_OVER_QUERY_LIMIT = "OVER_QUERY_LIMIT";
+	public static String STATUS_CODE_REQUEST_DENIED = "REQUEST_DENIED";
+	public static String STATUS_CODE_INVALID_REQUEST = "INVALID_REQUEST";
 
 	/**
 	 * @param key
@@ -46,9 +55,14 @@ public interface GooglePlacesSearch {
 	 * @return
 	 * @throws LocationNotAvailableException
 	 * @throws APIKeyNotSetException
+	 * @throws RequestWrongFormattedException
+	 * @throws RequestLimitExceededException
+	 * @throws RequestDeniedException
+	 * @throws RequestException
 	 */
 	public List<Place> searchForStores(List<String> storeNames, int radius)
-			throws LocationNotAvailableException, APIKeyNotSetException;
+			throws LocationNotAvailableException, APIKeyNotSetException,
+			RequestException;
 
 	/**
 	 * @param criterias
@@ -56,8 +70,13 @@ public interface GooglePlacesSearch {
 	 * @return
 	 * @throws LocationNotAvailableException
 	 * @throws APIKeyNotSetException
+	 * @throws RequestWrongFormattedException
+	 * @throws RequestLimitExceededException
+	 * @throws RequestDeniedException
+	 * @throws RequestException
 	 */
-	public List<Place> search(List<? extends FilterCriteria> criterias, int radius)
-			throws LocationNotAvailableException, APIKeyNotSetException;
+	public List<Place> search(List<? extends FilterCriteria> criterias,
+			int radius) throws LocationNotAvailableException,
+			APIKeyNotSetException, RequestException;
 
 }

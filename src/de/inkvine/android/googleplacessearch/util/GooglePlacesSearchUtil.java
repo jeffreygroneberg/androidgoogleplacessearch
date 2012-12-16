@@ -45,7 +45,7 @@ public class GooglePlacesSearchUtil {
 		return PLACES_API_URL + PLACES_LOCATION_PARAM + "=" + latitute + ","
 				+ longitute + "&" + PLACES_RADIUS_PARAM + "=" + radius + "&"
 				+ PLACES_TYPES_PARAM + "=" + types + "&" + PLACES_NAME_PARAM
-				+ "=" + searchName + "&" + PLACES_SENSOR_PARAM + "=true&"
+				+ "=" + searchName + "&" + PLACES_SENSOR_PARAM + "=trueeee&"
 				+ PLACES_KEY_PARAM + "=" + apiKey;
 
 	}
