@@ -1,6 +1,6 @@
-package de.inkvine.android.googleplacessearch.impl.generated_gson;
+package de.inkvine.android.googleplacessearch.impl;
 
-public class Location {
+class Location {
 	private Number lat;
 	private Number lng;
 

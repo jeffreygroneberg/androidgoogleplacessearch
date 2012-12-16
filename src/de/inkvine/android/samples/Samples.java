@@ -5,14 +5,14 @@ import java.util.List;
 
 import android.location.Location;
 import android.util.Log;
-import de.inkvine.android.googleplacessearch.FilterCriteria;
 import de.inkvine.android.googleplacessearch.GooglePlacesSearch;
-import de.inkvine.android.googleplacessearch.LimitedResultFilterCriteria;
 import de.inkvine.android.googleplacessearch.exceptions.APIKeyNotSetException;
 import de.inkvine.android.googleplacessearch.exceptions.LocationNotAvailableException;
+import de.inkvine.android.googleplacessearch.filter.FilterCriteria;
+import de.inkvine.android.googleplacessearch.filter.LimitedResultFilterCriteria;
+import de.inkvine.android.googleplacessearch.filter.impl.FilterCriteriaImpl;
+import de.inkvine.android.googleplacessearch.filter.impl.FilterCriteriaWithLimitedResultImpl;
 import de.inkvine.android.googleplacessearch.impl.DefaultGooglePlacesSearch;
-import de.inkvine.android.googleplacessearch.impl.FilterCriteriaImpl;
-import de.inkvine.android.googleplacessearch.impl.FilterCriteriaWithLimitedResultImpl;
 import de.inkvine.android.googleplacessearch.model.Place;
 
 public class Samples {

@@ -1,9 +1,8 @@
-package de.inkvine.android.googleplacessearch.impl.model;
+package de.inkvine.android.googleplacessearch.impl;
 
 import java.util.List;
 
-import de.inkvine.android.googleplacessearch.FilterCriteria;
-import de.inkvine.android.googleplacessearch.impl.generated_gson.Results;
+import de.inkvine.android.googleplacessearch.filter.FilterCriteria;
 import de.inkvine.android.googleplacessearch.model.Geometry;
 import de.inkvine.android.googleplacessearch.model.Location;
 import de.inkvine.android.googleplacessearch.model.OpeningHour;
@@ -16,7 +15,7 @@ import de.inkvine.android.googleplacessearch.model.Place;
  * @author Jeffrey Groneberg (www.twitter.com/inkvine)
  * 
  */
-public class PlaceImpl implements Place {
+class PlaceImpl implements Place {
 
 	private Results gsonResultType;
 	private FilterCriteria criteria;

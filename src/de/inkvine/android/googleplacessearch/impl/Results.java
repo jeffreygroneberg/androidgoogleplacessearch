@@ -1,8 +1,8 @@
-package de.inkvine.android.googleplacessearch.impl.generated_gson;
+package de.inkvine.android.googleplacessearch.impl;
 
 import java.util.List;
 
-public class Results {
+class Results {
 	private Geometry geometry;
 	private String icon;
 	private String id;

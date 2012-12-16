@@ -41,6 +41,7 @@ public class GooglePlacesSearchUtil {
 
 		}
 
+		// "&rankby=distance&" +
 		return PLACES_API_URL + PLACES_LOCATION_PARAM + "=" + latitute + ","
 				+ longitute + "&" + PLACES_RADIUS_PARAM + "=" + radius + "&"
 				+ PLACES_TYPES_PARAM + "=" + types + "&" + PLACES_NAME_PARAM

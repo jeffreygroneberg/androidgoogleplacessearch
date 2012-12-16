@@ -1,8 +1,9 @@
-package de.inkvine.android.googleplacessearch.impl.generated_gson;
+package de.inkvine.android.googleplacessearch.impl;
 
 import java.util.List;
 
-public class PlacesResponse {
+
+class PlacesResponse {
 
 	private List<Results> results;
 	private String status;

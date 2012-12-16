@@ -2,7 +2,7 @@ package de.inkvine.android.googleplacessearch.model;
 
 import java.util.List;
 
-import de.inkvine.android.googleplacessearch.FilterCriteria;
+import de.inkvine.android.googleplacessearch.filter.FilterCriteria;
 
 /**
  * A place that corresponds to one of the filter criterias given 

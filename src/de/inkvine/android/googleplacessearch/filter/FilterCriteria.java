@@ -1,4 +1,4 @@
-package de.inkvine.android.googleplacessearch;
+package de.inkvine.android.googleplacessearch.filter;
 
 import java.util.List;
 

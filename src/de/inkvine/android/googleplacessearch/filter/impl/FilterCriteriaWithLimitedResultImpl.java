@@ -1,9 +1,9 @@
-package de.inkvine.android.googleplacessearch.impl;
+package de.inkvine.android.googleplacessearch.filter.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.inkvine.android.googleplacessearch.LimitedResultFilterCriteria;
+import de.inkvine.android.googleplacessearch.filter.LimitedResultFilterCriteria;
 
 /**
  * Default implementation of a LimitedResultFilterCriteria. This class assures
@@ -26,7 +26,11 @@ public class FilterCriteriaWithLimitedResultImpl extends FilterCriteriaImpl
 	 */
 	private List<String> typeList;
 
-	private int maxResults = -1;
+	
+	/**
+	 * The number of results that should be returned (default = 2)
+	 */
+	private int maxResults = LimitedResultFilterCriteria.MAX_RESULTS_DEFAULT;
 
 	public FilterCriteriaWithLimitedResultImpl(String placesName,
 			List<String> typeList, int maxResults) {

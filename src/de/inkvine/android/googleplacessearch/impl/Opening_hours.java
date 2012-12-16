@@ -1,7 +1,6 @@
-package de.inkvine.android.googleplacessearch.impl.generated_gson;
+package de.inkvine.android.googleplacessearch.impl;
 
-
-public class Opening_hours {
+class Opening_hours {
 	private boolean open_now;
 
 	public boolean getOpen_now() {

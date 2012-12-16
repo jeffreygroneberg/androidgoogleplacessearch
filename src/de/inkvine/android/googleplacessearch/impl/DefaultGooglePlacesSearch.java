@@ -15,14 +15,12 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 
-import de.inkvine.android.googleplacessearch.FilterCriteria;
 import de.inkvine.android.googleplacessearch.GooglePlacesSearch;
-import de.inkvine.android.googleplacessearch.LimitedResultFilterCriteria;
 import de.inkvine.android.googleplacessearch.exceptions.APIKeyNotSetException;
 import de.inkvine.android.googleplacessearch.exceptions.LocationNotAvailableException;
-import de.inkvine.android.googleplacessearch.impl.generated_gson.PlacesResponse;
-import de.inkvine.android.googleplacessearch.impl.generated_gson.Results;
-import de.inkvine.android.googleplacessearch.impl.model.PlaceImpl;
+import de.inkvine.android.googleplacessearch.filter.FilterCriteria;
+import de.inkvine.android.googleplacessearch.filter.LimitedResultFilterCriteria;
+import de.inkvine.android.googleplacessearch.filter.impl.FilterCriteriaWithLimitedResultImpl;
 import de.inkvine.android.googleplacessearch.model.Place;
 import de.inkvine.android.googleplacessearch.util.GooglePlacesSearchUtil;
 

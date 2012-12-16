@@ -1,6 +1,7 @@
-package de.inkvine.android.googleplacessearch.impl.generated_gson;
+package de.inkvine.android.googleplacessearch.impl;
 
-public class Geometry  {
+
+class Geometry  {
 	private Location location;
 
 	public Location getLocation() {

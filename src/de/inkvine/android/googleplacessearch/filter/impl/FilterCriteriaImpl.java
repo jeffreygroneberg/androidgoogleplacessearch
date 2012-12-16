@@ -1,9 +1,9 @@
-package de.inkvine.android.googleplacessearch.impl;
+package de.inkvine.android.googleplacessearch.filter.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.inkvine.android.googleplacessearch.FilterCriteria;
+import de.inkvine.android.googleplacessearch.filter.FilterCriteria;
 
 public class FilterCriteriaImpl implements FilterCriteria {
 

@@ -5,6 +5,7 @@ import java.util.List;
 import android.location.Location;
 import de.inkvine.android.googleplacessearch.exceptions.APIKeyNotSetException;
 import de.inkvine.android.googleplacessearch.exceptions.LocationNotAvailableException;
+import de.inkvine.android.googleplacessearch.filter.FilterCriteria;
 import de.inkvine.android.googleplacessearch.model.Place;
 
 /**
