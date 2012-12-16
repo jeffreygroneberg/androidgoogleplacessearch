@@ -61,7 +61,7 @@ public class FilterCriteriaWithLimitedResultImpl extends FilterCriteriaImpl
 
 	@Override
 	public List<String> getPlacesTypes() {
-		// TODO Auto-generated method stub
+
 		return typeList;
 	}
 
@@ -77,7 +77,7 @@ public class FilterCriteriaWithLimitedResultImpl extends FilterCriteriaImpl
 
 	@Override
 	public int getMaxResults() {
-		// TODO Auto-generated method stub
+
 		return maxResults;
 	}
 

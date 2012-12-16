@@ -190,7 +190,7 @@ public class DefaultGooglePlacesSearch implements GooglePlacesSearch {
 			try {
 				thread.join();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+
 				e.printStackTrace();
 			}
 
@@ -215,7 +215,7 @@ public class DefaultGooglePlacesSearch implements GooglePlacesSearch {
 					location.getLongitude(), radius, criteria.getPlacesTypes()));
 			System.out.println(url);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 
@@ -223,14 +223,14 @@ public class DefaultGooglePlacesSearch implements GooglePlacesSearch {
 		try {
 			con = (HttpURLConnection) url.openConnection();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
 		try {
 			return parseResponse(con.getInputStream());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		return null;

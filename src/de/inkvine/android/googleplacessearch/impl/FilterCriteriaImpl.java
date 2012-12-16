@@ -38,7 +38,7 @@ public class FilterCriteriaImpl implements FilterCriteria {
 
 	@Override
 	public List<String> getPlacesTypes() {
-		// TODO Auto-generated method stub
+
 		return typeList;
 	}
 
