@@ -11,18 +11,18 @@ Basically it is always the same:
 =========================
 
 	public class Samples {
-
+	
 		public void sampleStoreSearch(Location location, String apiKey) {
-
-			ArrayList<String> storeNames = new ArrayList<String>();	
+	
+			ArrayList<String> storeNames = new ArrayList<String>();
 			storeNames.add("Esprit");
 			storeNames.add("Mexx");
 			storeNames.add("Tchibo");
-
+	
 			GooglePlacesSearch placesSearch = new DefaultGooglePlacesSearch(
-				location, apiKey);
-
-		// in meter
+					location, apiKey);
+	
+			// in meter
 			int radiusToSearchFor = 1000;
 			try {
 				List<Place> places = placesSearch.searchForStores(storeNames,
@@ -32,7 +32,7 @@ Basically it is always the same:
 					// Get all the stuff about the found place
 					// eg the name
 					Log.i("sampleStoreSearch", place.getName());
-
+	
 				}
 			} catch (LocationNotAvailableException e) {
 	
@@ -40,21 +40,25 @@ Basically it is always the same:
 			} catch (APIKeyNotSetException e) {
 	
 				e.printStackTrace();
+			} catch (RequestException e) {
+	
+				Log.e("sampleStoreSearch", e.getGeneratedURL());
+				e.printStackTrace();
 			}
-
+	
 		}
-
+	
 		public void sampleSearchWithCustomResultFilterCriteria(Location location,
 				String apiKey) {
-
+	
 			ArrayList<String> placesNames = new ArrayList<String>();
 			placesNames.add("Esprit");
 			placesNames.add("Mexx");
 			placesNames.add("Tchibo");
-
+	
 			GooglePlacesSearch placesSearch = new DefaultGooglePlacesSearch(
 					location, apiKey);
-
+	
 			List<FilterCriteria> searchFilters = new ArrayList<FilterCriteria>();
 	
 			// Build list of filter criteria
@@ -62,7 +66,7 @@ Basically it is always the same:
 	
 				LimitedResultFilterCriteria filter = new FilterCriteriaWithLimitedResultImpl(
 						name);
-
+	
 				// Set results that will come back for THIS filter
 				filter.setMaxResults(3);
 	
@@ -73,7 +77,7 @@ Basically it is always the same:
 				searchFilters.add(filter);
 	
 			}
-
+	
 			// Just add another filter that has an unlimited number of results
 	
 			String additionalPlaceName = "A place name";
@@ -97,7 +101,7 @@ Basically it is always the same:
 					// eg the name
 					Log.i("sampleSearchWithCustomResultFilterCriteria",
 							place.getName());
-
+	
 				}
 			} catch (LocationNotAvailableException e) {
 	
@@ -105,8 +109,14 @@ Basically it is always the same:
 			} catch (APIKeyNotSetException e) {
 	
 				e.printStackTrace();
+			} catch (RequestException e) {
+	
+				Log.e("sampleSearchWithCustomResultFilterCriteria",
+						e.getGeneratedURL());
+				e.printStackTrace();
+	
 			}
-
+	
 		}
 	
 	}
