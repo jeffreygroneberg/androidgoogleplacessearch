@@ -1,8 +1,12 @@
 # androidgoogleplacessearch - The easy way to search for Google Places nearby
 
-Remember! You have to pass a **location instance and your API Key** to the Google Places API 
-to the GooglePlacesSearch instance.
+Remember! You have to pass a **location instance and your API Key** to the GooglePlacesSearch instance.
 The two sample methods below, show how you can interact with the GooglePlacesSearch API.
+Basically it is always the same:
+
+1. Build one or more filters that define what you are looking for.
+2. Pass the filters to the search methods
+3. Get all the places you where looking for
  
 =========================
 
