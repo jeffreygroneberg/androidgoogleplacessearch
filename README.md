@@ -7,6 +7,8 @@ Basically it is always the same:
 1. Build one or more filters that define what you are looking for.
 2. Pass the filters to the search methods
 3. Get all the places you where looking for
+
+That's it!
  
 =========================
 
